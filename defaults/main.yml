@@ -1,2 +1,2 @@
 ---
-# defaults file for nginx
+nginx_site_template: "nginx.conf.j2"

@@ -3,6 +3,7 @@
   apt:
     name: nginx
     state: present
+    updated_cashe: yes
 
 - name: Check if nginx is running
   service:
