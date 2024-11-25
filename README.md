@@ -1,38 +1,45 @@
-Role Name
-=========
+# Nginx Role
 
-A brief description of the role goes here.
+An Ansible role to install and configure Nginx with customizable site configurations.
 
-Requirements
-------------
+## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Ensure that the target hosts meet the following requirements:
+- The `apt` package manager is available on the target system.
+- Template-specific variables are set, such as `static_files_path` and `proxy_pass_url`.
 
-Role Variables
---------------
+## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+The following variables can be customized in `defaults/main.yml`:
 
-Dependencies
-------------
+| Variable              | Description                                   | Default Value               |
+|-----------------------|-----------------------------------------------|-----------------------------|
+| `nginx_site_template` | Path to the Jinja2 template for Nginx config | `nginx.conf.j2`            |
+| `nginx_site_available`| Path to Nginx's available site configuration | `/etc/nginx/sites-available/default` |
+| `nginx_site_enabled`  | Path to Nginx's enabled site configuration   | `/etc/nginx/sites-enabled/default` |
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+Additionally, you can set the following variables for the Nginx template:
+- `static_files_path`: Directory for static files to serve.
+- `proxy_pass_url`: Upstream server URL for proxying requests.
 
-Example Playbook
-----------------
+## Dependencies
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+This role has no dependencies on other Galaxy roles.
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+## Example Playbook
 
-License
--------
+Here is an example of how to use this role:
 
-BSD
+```yaml
+- hosts: servers
+  vars:
+    static_files_path: "/var/www/static"
+    proxy_pass_url: "http://localhost:8000"
+  roles:
+    - role: nginx
+```
 
-Author Information
-------------------
+## Handlers
+This role includes a handler to restart Nginx:
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Restart nginx: Restarts the Nginx service when notified.
