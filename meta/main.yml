@@ -1,6 +1,6 @@
 galaxy_info:
   author: Fisenko Nikita
-  description: Ansible Galaxy Role For Docker
+  description: Ansible Galaxy Role For Nginx
   company: is-devops-4sem
 
   # If the issue tracker for your role is not on github, uncomment the
