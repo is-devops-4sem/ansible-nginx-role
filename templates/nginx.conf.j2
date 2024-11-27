@@ -5,6 +5,8 @@ events {
 }
 
 http {
-    default_type application/octet-stream;
+    include       mime.types;
+    default_type  application/octet-stream;
+
     include /etc/nginx/sites-enabled/*;
 }
