@@ -21,7 +21,7 @@
     owner: root
     group: root
     mode: '0644'
-    validate: "nginx -t -c %s"
+    validate: "nginx -t -c {{ nginx_conf_dest }}"
 
 - name: Copy nginx site configuration with validation
   template:
