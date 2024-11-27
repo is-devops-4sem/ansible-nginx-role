@@ -2,8 +2,5 @@
 worker_connections: "1024"
 nginx_conf_template: "nginx.conf.j2"
 nginx_conf_dest: "/etc/nginx/nginx.conf"
-nginx_site_template: "default.conf.j2"
-nginx_site_available: "/etc/nginx/sites-available/default"
-nginx_site_enabled: "/etc/nginx/sites-enabled/default"
 static_files_path: "/var/www/static"
 proxy_pass_url: "http://127.0.0.1:8080"
