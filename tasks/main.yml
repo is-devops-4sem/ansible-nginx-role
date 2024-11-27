@@ -5,11 +5,14 @@
     state: present
     update_cache: yes
 
-- name: Copy nginx site configuration
+- name: Copy nginx site configuration with validation
   template:
     src: "{{ nginx_site_template }}"
     dest: "{{ nginx_site_available }}"
-  notify: Restart nginx
+    validate: "nginx -t -c %s"
+    owner: root
+    group: root
+    mode: '0644'
 
 - name: Enable nginx site
   file:
@@ -20,5 +23,5 @@
 - name: Ensure nginx is running
   service:
     name: nginx
-    state: started
+    state: restarted
     enabled: true
