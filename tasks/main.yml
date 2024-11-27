@@ -14,7 +14,7 @@
     mode: '0644'
     validate: "nginx -t -c %s"
 
-- name: Copy default site configuration with validation
+- name: Copy default site configuration
   template:
     src: "{{ default_site_template }}"
     dest: "/etc/nginx/sites-available/default"
