@@ -5,6 +5,24 @@
     state: present
     update_cache: yes
 
+- name: Ensure nginx configuration directories exist
+  file:
+    path: "/etc/nginx/{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - sites-available
+    - sites-enabled
+
+- name: Copy main nginx configuration with validation
+  template:
+    src: "{{ nginx_conf_template }}"
+    dest: "{{ nginx_conf_dest }}"
+    owner: root
+    group: root
+    mode: '0644'
+    validate: "nginx -t -c %s"
+
 - name: Copy nginx site configuration with validation
   template:
     src: "{{ nginx_site_template }}"

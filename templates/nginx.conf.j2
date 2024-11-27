@@ -1,15 +1,21 @@
-http {
-    server {
-        listen 80;
+user nginx;
+worker_processes auto;
 
-        location /static/ {
-            alias {{ static_files_path }};
-        }
-
-        location / {
-            proxy_pass {{ proxy_pass_url }};
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
-        }
-    }
+events {
+    worker_connections {{ worker_connections }};
 }
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    server_tokens off;
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout 65;
+    types_hash_max_size 2048;
+
+    include /etc/nginx/sites-enabled/*;
+}
+
