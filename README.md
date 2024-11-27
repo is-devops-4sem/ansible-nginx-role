@@ -38,8 +38,3 @@ Here is an example of how to use this role:
   roles:
     - role: nginx
 ```
-
-## Handlers
-This role includes a handler to restart Nginx:
-
-Restart nginx: Restarts the Nginx service when notified.
