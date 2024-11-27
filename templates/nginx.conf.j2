@@ -5,18 +5,6 @@ events {
 }
 
 http {
-    default_type  application/octet-stream;
-    server {
-        listen 80;
-
-        location /static/ {
-            alias {{ static_files_path }};
-        }
-
-        location / {
-            proxy_pass {{ proxy_pass_url }};
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
-        }
-    }
+    default_type application/octet-stream;
+    include /etc/nginx/sites-enabled/*;
 }
