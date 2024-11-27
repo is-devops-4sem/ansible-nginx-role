@@ -27,7 +27,7 @@
   template:
     src: "{{ nginx_site_template }}"
     dest: "{{ nginx_site_available }}"
-    validate: "nginx -t -c %s"
+    validate: "nginx -t -c {{ nginx_site_available }}"
     owner: root
     group: root
     mode: '0644'
