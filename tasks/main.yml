@@ -14,6 +14,21 @@
     mode: '0644'
     validate: "nginx -t -c %s"
 
+- name: Copy default site configuration with validation
+  template:
+    src: "{{ default_site_template }}"
+    dest: "/etc/nginx/sites-available/default"
+    owner: root
+    group: root
+    mode: '0644'
+    validate: "nginx -t -c %s"
+
+- name: Create symbolic link for default site
+  file:
+    src: "/etc/nginx/sites-available/default"
+    dest: "/etc/nginx/sites-enabled/default"
+    state: link
+
 - name: Ensure nginx is running
   service:
     name: nginx
